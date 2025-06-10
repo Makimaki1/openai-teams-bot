@@ -28,3 +28,4 @@ This bot exposes a `/chat` endpoint for [Google Chat](https://developers.google.
 4. Expose the port to the internet and configure the URL in your Google Chat app.
 
 When Google Chat sends a message, the bot returns the OpenAI response.
+
