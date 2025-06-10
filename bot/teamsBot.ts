@@ -12,12 +12,18 @@ export class TeamsBot {
   }
 
   async handleMessage(text: string): Promise<string> {
-    const response = await this.openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: text,
-      temperature: 0,
-      max_tokens: 2048,
-    });
-    return response.data.choices[0].text || "";
+    try {
+      const response = await this.openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: text,
+        temperature: 0,
+        max_tokens: 2048,
+      });
+
+      return response.data.choices[0].text ?? "";
+    } catch (error) {
+      console.error("OpenAI request failed", error);
+      return "";
+    }
   }
 }

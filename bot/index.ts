@@ -1,12 +1,9 @@
 import express from "express";
-import bodyParser from "body-parser";
-import { google } from "googleapis";
-import config from "./config";
 import { TeamsBot } from "./teamsBot";
 
 const bot = new TeamsBot();
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.post("/chat", async (req, res) => {
   try {
@@ -19,7 +16,7 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3978;
+const port = Number(process.env.PORT) || 3978;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
