@@ -1,6 +1,6 @@
-# OpenAI Teams Bot app
+# OpenAI Chat Bot
 
-Follow [this guide](./bot/README.md) to get started.
+See [bot/README.md](./bot/README.md) for instructions on running the Google Chat bot.
 
 You could also try the [ChatGPT Teams Bot app](https://github.com/formulahendry/chatgpt-teams-bot) which uses latest `gpt-3.5-turbo` model. `Turbo` is the same model family that powers ChatGPT.
 
