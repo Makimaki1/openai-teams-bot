@@ -1,8 +1,8 @@
 import express from "express";
-import { TeamsBot } from "./teamsBot";
+import { GoogleChatBot } from "./googleChatBot";
 
-const bot = new TeamsBot();
-const app = express();
+export const app = express();
+const bot = new GoogleChatBot();
 app.use(express.json());
 
 app.post("/chat", async (req, res) => {
@@ -16,7 +16,10 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-const port = Number(process.env.PORT) || 3978;
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
+if (require.main === module) {
+  const port = Number(process.env.PORT) || 3978;
+  app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+  });
+}
+
