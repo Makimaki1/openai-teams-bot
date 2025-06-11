@@ -1,7 +1,7 @@
 import express from "express";
-import { TeamsBot } from "./teamsBot";
+import { GoogleChatBot } from "./googleChatBot";
 
-const bot = new TeamsBot();
+const bot = new GoogleChatBot();
 const app = express();
 app.use(express.json());
 
@@ -12,6 +12,17 @@ app.post("/chat", async (req, res) => {
     res.json({ text: reply });
   } catch (error) {
     console.error("Error processing chat event", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+app.post("/mcp", async (req, res) => {
+  try {
+    const text = req.body.text || "";
+    const reply = await bot.handleMessage(text);
+    res.json({ text: reply });
+  } catch (error) {
+    console.error("Error processing MCP event", error);
     res.status(500).send("Internal server error");
   }
 });

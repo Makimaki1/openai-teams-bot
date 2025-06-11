@@ -1,7 +1,7 @@
 import { Configuration, OpenAIApi } from "openai";
 import config from "./config";
 
-export class TeamsBot {
+export class GoogleChatBot {
   private openai: OpenAIApi;
 
   constructor() {
@@ -13,17 +13,16 @@ export class TeamsBot {
 
   async handleMessage(text: string): Promise<string> {
     try {
-      const response = await this.openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: text,
+      const response = await this.openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: text }],
         temperature: 0,
-        max_tokens: 2048,
       });
 
-      return response.data.choices[0].text ?? "";
-    } catch (error) {
-      console.error("OpenAI request failed", error);
-      return "";
+      return response.data.choices[0].message?.content ?? "";
+    } catch (error: any) {
+      console.error("OpenAI request failed", error?.message ?? error);
+      return "Sorry, something went wrong.";
     }
   }
 }
