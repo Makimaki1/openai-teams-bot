@@ -64,3 +64,4 @@ output domain string = webApp.properties.defaultHostName
 output appServicePlanName string = serverfarmsName
 output resourceId string = webApp.id
 output siteEndpoint string = 'https://${webApp.properties.defaultHostName}'
+

@@ -16,3 +16,4 @@ module config './config.bicep' = {
   }
 }
 output configOutput object = contains(reference(resourceId('Microsoft.Resources/deployments', config.name), '2020-06-01'), 'outputs') ? config : {}
+
