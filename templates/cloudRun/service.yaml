@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: openai-chat-bot
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/PROJECT_ID/openai-chat-bot
+        env:
+        - name: OPENAI_API_KEY
+          value: YOUR_OPENAI_KEY
+        - name: GOOGLE_CLIENT_EMAIL
+          value: service-account-email@project.iam.gserviceaccount.com
+        - name: GOOGLE_PRIVATE_KEY
+          value: |
+            -----BEGIN PRIVATE KEY-----
+            ...
+            -----END PRIVATE KEY-----
+        - name: PORT
+          value: "8080"

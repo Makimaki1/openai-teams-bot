@@ -1,13 +1,16 @@
 import { Configuration, OpenAIApi } from "openai";
-import config from "./config";
 
 export class GoogleChatBot {
   private openai: OpenAIApi;
 
   constructor() {
-    const configuration = new Configuration({
-      apiKey: config.openaiApiKey,
-    });
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new Error(
+        'Missing OPENAI_API_KEY. Please set the OPENAI_API_KEY environment variable.'
+      );
+    }
+    const configuration = new Configuration({ apiKey });
     this.openai = new OpenAIApi(configuration);
   }
 
