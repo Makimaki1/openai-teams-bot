@@ -36,8 +36,13 @@ It also includes a `/mcp` endpoint for events from the [GitHub MCP server](https
 5. If using the GitHub MCP server, configure it to POST events to `/mcp` with the shared secret.
 
 
+
 When Google Chat or MCP sends a message, the bot returns the OpenAI response generated using the ChatGPT model.
-=======
+
+
+
+When Google Chat or MCP sends a message, the bot returns the OpenAI response generated using the ChatGPT model.
+
 When Google Chat sends a message, the bot returns the OpenAI response.
 
 

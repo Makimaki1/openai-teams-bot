@@ -5,6 +5,10 @@ const config = {
   googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY,
   mcpSecret: process.env.MCP_SECRET,
 
+
+
+
+
 };
 
 export default config;

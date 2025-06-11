@@ -14,3 +14,7 @@ If you need a Microsoft Teams bot, see the [ChatGPT Teams Bot app](https://githu
 
 
 
+
+![OpenAI](./bot/images/openai-chat.png)
+
+
