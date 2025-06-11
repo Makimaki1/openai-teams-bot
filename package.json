@@ -1,4 +1,5 @@
 {
+t
     "name": "openai-teams-bot",
     "version": "0.0.1",
     "description": "",
@@ -10,4 +11,14 @@
         "@microsoft/teamsfx-cli": "1.*"
     },
     "license": "MIT"
+=======
+  "name": "googlechat-mcp",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "test": "npm --prefix bot test"
+  },
+  "license": "MIT"
+
 }

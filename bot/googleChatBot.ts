@@ -19,6 +19,7 @@ export class GoogleChatBot {
         temperature: 0,
       });
 
+
       return response.data.choices[0].message?.content ?? "";
     } catch (error: any) {
       console.error("OpenAI request failed", error?.message ?? error);
@@ -26,3 +27,13 @@ export class GoogleChatBot {
     }
   }
 }
+
+      return response.data.choices[0].message?.content ?? "";
+    } catch (error: any) {
+      console.error("OpenAI request failed", error.message || error);
+      return "Sorry, I couldn't process your request.";
+    }
+  }
+}
+
+
