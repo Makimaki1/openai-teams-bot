@@ -1,15 +1,12 @@
 # GoogleChat MCP Server
 
+This repository contains two components:
 
-See [bot/README.md](./bot/README.md) for instructions on running the Google Chat bot or integrating with the GitHub MCP server.
+1. **Google Chat Bot (Node.js)** – see [bot/README.md](./bot/README.md) for instructions on running the existing Express-based bot that integrates with the OpenAI API.
+2. **FastAPI MCP Server (Python)** – a lightweight server exposing Google Chat functionality as MCP tools.
 
-This repository provides a GitHub MCP server that leverages the OpenAI API to power a Google Chat bot. See [bot/README.md](./bot/README.md) for instructions on running the bot.
+The FastAPI server provides endpoints for sending messages, fetching users, and listing channels using Google OAuth credentials.  See [mcp_server/README.md](./mcp_server/README.md) for setup details.
 
-
-If you need a Microsoft Teams bot, see the [ChatGPT Teams Bot app](https://github.com/formulahendry/chatgpt-teams-bot) which uses the latest `gpt-3.5-turbo` model. `Turbo` is the same model family that powers ChatGPT.
-
-![OpenAI](./bot/images/openai-chat.png)
-
+If you need a Microsoft Teams bot, see the [ChatGPT Teams Bot app](https://github.com/formulahendry/chatgpt-teams-bot) which uses the latest `gpt-3.5-turbo` model.
 
 ![OpenAI](./bot/images/openai-chat.png)
-

@@ -1,10 +1,6 @@
 import express from "express";
 import { GoogleChatBot } from "./googleChatBot";
 
-
-const bot = new GoogleChatBot();
-const app = express();
-
 export const app = express();
 const bot = new GoogleChatBot();
 
@@ -25,7 +21,6 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-
 app.post("/mcp", async (req, res) => {
   try {
     const text = req.body.text || "";
@@ -37,16 +32,9 @@ app.post("/mcp", async (req, res) => {
   }
 });
 
-const port = Number(process.env.PORT) || 3978;
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
-=======
 if (require.main === module) {
   const port = Number(process.env.PORT) || 3978;
   app.listen(port, () => {
     console.log(`Server started on port ${port}`);
   });
 }
-
-
