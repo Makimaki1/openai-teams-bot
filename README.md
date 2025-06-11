@@ -2,7 +2,7 @@
 
 This repository provides a GitHub MCP server that leverages the OpenAI API to power a Google Chat bot. See [bot/README.md](./bot/README.md) for instructions on running the bot.
 
-You could also try the [ChatGPT Teams Bot app](https://github.com/formulahendry/chatgpt-teams-bot) which uses the latest `gpt-3.5-turbo` model. `Turbo` is the same model family that powers ChatGPT.
+If you need a Microsoft Teams bot, see the [ChatGPT Teams Bot app](https://github.com/formulahendry/chatgpt-teams-bot) which uses the latest `gpt-3.5-turbo` model. `Turbo` is the same model family that powers ChatGPT.
 
 ![OpenAI](./bot/images/openai-chat.png)
 
