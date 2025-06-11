@@ -18,6 +18,16 @@ export class GoogleChatBot {
         messages: [{ role: "user", content: text }],
         temperature: 0,
       });
+
+
+      return response.data.choices[0].message?.content ?? "";
+    } catch (error: any) {
+      console.error("OpenAI request failed", error?.message ?? error);
+      return "Sorry, something went wrong.";
+    }
+  }
+}
+
       return response.data.choices[0].message?.content ?? "";
     } catch (error: any) {
       console.error("OpenAI request failed", error.message || error);
@@ -25,4 +35,5 @@ export class GoogleChatBot {
     }
   }
 }
+
 
