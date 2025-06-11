@@ -6,7 +6,6 @@ This bot exposes a `/chat` endpoint for [Google Chat](https://developers.google.
 
 - Node.js 18+
 - An OpenAI API key
-- A Google service account with access to the Chat API
 
 ## Setup
 
@@ -17,8 +16,6 @@ This bot exposes a `/chat` endpoint for [Google Chat](https://developers.google.
 2. Configure environment variables in `.env.local` or your shell:
    ```bash
    OPENAI_API_KEY=your_openai_key
-   GOOGLE_CLIENT_EMAIL=service-account-email@project.iam.gserviceaccount.com
-   GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
    PORT=3978 # optional
    ```
 3. Start the bot:
