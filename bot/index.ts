@@ -7,7 +7,11 @@ app.use(express.json());
 
 app.post("/chat", async (req, res) => {
   try {
-    const text = req.body.message?.text || "";
+    const text = req.body.message?.text;
+    if (!text || typeof text !== "string" || text.trim() === "") {
+      res.status(400).json({ error: "Message text is required" });
+      return;
+    }
     const reply = await bot.handleMessage(text);
     res.json({ text: reply });
   } catch (error) {
