@@ -21,5 +21,11 @@ describe('/chat endpoint', () => {
     expect(response.status).toBe(200);
     expect(response.body.text).toBe('pong');
   });
+
+  it('returns 400 when message text is missing', async () => {
+    const response = await request(app).post('/chat').send({});
+    expect(response.status).toBe(400);
+    expect(response.body.error).toMatch(/text is required/i);
+  });
 });
 
