@@ -1,28 +1,32 @@
 import { GoogleChatBot } from '../googleChatBot';
-import { OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 
 jest.mock('openai');
 
-const MockOpenAIApi = OpenAIApi as jest.MockedClass<typeof OpenAIApi>;
+const MockOpenAI = OpenAI as jest.MockedClass<typeof OpenAI>;
 
 describe('GoogleChatBot', () => {
   beforeEach(() => {
-    MockOpenAIApi.mockClear();
+    MockOpenAI.mockClear();
   });
 
   it('returns reply text from OpenAI API', async () => {
-    const createChatCompletion = jest.fn().mockResolvedValue({
-      data: { choices: [{ message: { content: 'hi' } }] },
+    const create = jest.fn().mockResolvedValue({
+      choices: [{ message: { content: 'hi' } }],
     });
-    MockOpenAIApi.mockImplementation(() => ({ createChatCompletion } as any));
+    MockOpenAI.mockImplementation(() => ({
+      chat: { completions: { create } },
+    }) as any);
     const bot = new GoogleChatBot();
     const reply = await bot.handleMessage('hello');
     expect(reply).toBe('hi');
   });
 
   it('handles errors gracefully', async () => {
-    const createChatCompletion = jest.fn().mockRejectedValue(new Error('fail'));
-    MockOpenAIApi.mockImplementation(() => ({ createChatCompletion } as any));
+    const create = jest.fn().mockRejectedValue(new Error('fail'));
+    MockOpenAI.mockImplementation(() => ({
+      chat: { completions: { create } },
+    }) as any);
     const bot = new GoogleChatBot();
     const reply = await bot.handleMessage('hello');
     expect(reply).toBe("Sorry, I couldn't process your request.");

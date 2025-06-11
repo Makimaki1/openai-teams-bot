@@ -1,5 +1,4 @@
 import request from 'supertest';
-import { app } from '../index';
 import { GoogleChatBot } from '../googleChatBot';
 
 jest.mock('../googleChatBot');
@@ -15,6 +14,7 @@ describe('/chat endpoint', () => {
     MockBot.mockImplementation(() => ({
       handleMessage: jest.fn().mockResolvedValue('pong'),
     }) as any);
+    const { app } = require('../index');
     const response = await request(app)
       .post('/chat')
       .send({ message: { text: 'ping' } });
@@ -23,6 +23,7 @@ describe('/chat endpoint', () => {
   });
 
   it('returns 400 when message text is missing', async () => {
+    const { app } = require('../index');
     const response = await request(app).post('/chat').send({});
     expect(response.status).toBe(400);
     expect(response.body.error).toMatch(/text is required/i);
