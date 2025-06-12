@@ -10,3 +10,16 @@ The FastAPI server provides endpoints for sending messages, fetching users, and 
 If you need a Microsoft Teams bot, see the [ChatGPT Teams Bot app](https://github.com/formulahendry/chatgpt-teams-bot) which uses the latest `gpt-3.5-turbo` model.
 
 ![OpenAI](./bot/images/openai-chat.png)
+
+## Testing
+
+Install Python dependencies and run all tests (Node and Python) with:
+
+```bash
+npm install --prefix bot
+pip install -r mcp_server/requirements.txt
+pip install pytest
+npm test
+```
+
+This runs the Jest tests in `bot/` and the Pytest suite under `mcp_server/tests`.
