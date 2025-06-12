@@ -7,6 +7,9 @@ It uses Google OAuth service account credentials and provides three endpoints:
 - `POST /fetch_users` – retrieve members in a space.
 - `GET  /list_channels` – list spaces available to the bot.
 
+All Google Chat API calls are run in a thread pool using FastAPI's
+`run_in_threadpool` helper so the async endpoints remain non-blocking.
+
 ## Setup
 
 1. Create a service account in Google Cloud and enable the Chat API.
