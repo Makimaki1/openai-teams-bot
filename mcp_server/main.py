@@ -15,6 +15,15 @@ class SpaceRequest(BaseModel):
     space_id: str
 
 
+class GroupRequest(BaseModel):
+    group_email: str
+
+
+class GroupMemberCheckRequest(BaseModel):
+    user_email: str
+    group_email: str
+
+
 @app.post("/send_message")
 async def send_message(req: MessageRequest):
     try:
@@ -38,6 +47,24 @@ async def list_channels():
     try:
         spaces = await google_chat.list_channels_async()
         return {"channels": spaces}
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+
+@app.post("/is_group_member")
+async def is_group_member(req: GroupMemberCheckRequest):
+    try:
+        result = google_chat.is_group_member(req.user_email, req.group_email)
+        return {"is_member": result}
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+
+@app.post("/list_group_members")
+async def list_group_members(req: GroupRequest):
+    try:
+        members = google_chat.list_group_members(req.group_email)
+        return {"members": members}
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))
 
