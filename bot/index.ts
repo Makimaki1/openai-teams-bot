@@ -1,5 +1,6 @@
 import express from "express";
 import { GoogleChatBot } from "./googleChatBot";
+import config from "./config";
 
 export const app = express();
 const bot = new GoogleChatBot();
@@ -23,6 +24,11 @@ app.post("/chat", async (req, res) => {
 
 app.post("/mcp", async (req, res) => {
   try {
+    const provided = (req.header("x-mcp-secret") as string) || req.body.secret;
+    if (config.mcpSecret && provided !== config.mcpSecret) {
+      res.status(401).send("Unauthorized");
+      return;
+    }
     const text = req.body.text || "";
     const reply = await bot.handleMessage(text);
     res.json({ text: reply });
