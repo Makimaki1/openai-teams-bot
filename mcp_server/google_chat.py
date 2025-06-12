@@ -16,7 +16,20 @@ SCOPES = [
 ]
 
 SERVICE_ACCOUNT_FILE = os.environ.get("GOOGLE_SERVICE_ACCOUNT_FILE")
+_CHAT_SERVICE = None
 
+
+def get_chat_service():
+    """Return an authorized Google Chat service client."""
+    global _CHAT_SERVICE
+    if _CHAT_SERVICE is None:
+        if not SERVICE_ACCOUNT_FILE:
+            raise RuntimeError("GOOGLE_SERVICE_ACCOUNT_FILE env var not set")
+        credentials = service_account.Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE, scopes=SCOPES
+        )
+        _CHAT_SERVICE = build("chat", "v1", credentials=credentials)
+    return _CHAT_SERVICE
 
 _cached_service = None
 _cached_credentials = None
@@ -42,6 +55,7 @@ def get_chat_service(refresh: bool = False):
         _cached_credentials.refresh(Request())
 
     return _cached_service
+
 
 
 def send_message(space_id: str, text: str) -> dict:
