@@ -1,11 +1,11 @@
 import request from 'supertest';
-import { GoogleChatBot } from '../googleChatBot';
 
-jest.mock('../googleChatBot');
-
-const MockBot = GoogleChatBot as jest.MockedClass<typeof GoogleChatBot>;
+let MockBot: jest.MockedClass<any>;
 
 beforeEach(() => {
+  jest.resetModules();
+  jest.mock('../googleChatBot');
+  MockBot = require('../googleChatBot').GoogleChatBot;
   MockBot.mockClear();
 });
 
@@ -30,3 +30,31 @@ describe('/chat endpoint', () => {
   });
 });
 
+describe('/mcp endpoint', () => {
+  it('accepts valid secret', async () => {
+    process.env.MCP_SECRET = 's3cr3t';
+    MockBot.mockImplementation(() => ({
+      handleMessage: jest.fn().mockResolvedValue('pong'),
+    }) as any);
+    const { app } = require('../index');
+    const response = await request(app)
+      .post('/mcp')
+      .set('X-MCP-Secret', 's3cr3t')
+      .send({ text: 'ping' });
+    expect(response.status).toBe(200);
+    expect(response.body.text).toBe('pong');
+  });
+
+  it('rejects invalid secret', async () => {
+    process.env.MCP_SECRET = 's3cr3t';
+    MockBot.mockImplementation(() => ({
+      handleMessage: jest.fn().mockResolvedValue('pong'),
+    }) as any);
+    const { app } = require('../index');
+    const response = await request(app)
+      .post('/mcp')
+      .set('X-MCP-Secret', 'bad')
+      .send({ text: 'ping' });
+    expect(response.status).toBe(401);
+  });
+});

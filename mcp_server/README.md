@@ -9,6 +9,9 @@ It uses Google OAuth service account credentials and provides these endpoints:
 - `POST /is_group_member` – check if a user belongs to a Google Group.
 - `POST /list_group_members` – list members of a Google Group.
 
+All Google Chat API calls are run in a thread pool using FastAPI's
+`run_in_threadpool` helper so the async endpoints remain non-blocking.
+
 ## Setup
 
 1. Create a service account in Google Cloud and enable the Chat API.
